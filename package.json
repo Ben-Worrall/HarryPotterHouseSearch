@@ -8,7 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^4.0.108",
     "@supabase/supabase-js": "^2.0.0",
+    "ai": "^7.0.162",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -17,6 +19,7 @@
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "pg": "^8.23.1",
     "typescript": "^5.0.0"
   }
 }
