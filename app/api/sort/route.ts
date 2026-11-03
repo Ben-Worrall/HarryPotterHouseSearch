@@ -157,8 +157,19 @@ export async function POST(req: NextRequest) {
       const data = JSON.parse(match[0])
       if (data.unknown) { skipped.push(c.name); continue }
 
+      // If the response looks like an API error rather than sorting output, surface it
+      if (!data.scores) {
+        if (!firstRawText) firstRawText = `No "scores" in response. Got: ${JSON.stringify(data).slice(0, 300)}`
+        skipped.push(c.name)
+        break
+      }
+
       const scores = normalise(data)
-      if (!scores) { skipped.push(c.name); continue }
+      if (!scores) {
+        if (!firstRawText) firstRawText = `Bad scores. Raw: ${JSON.stringify(data).slice(0, 300)}`
+        skipped.push(c.name)
+        break
+      }
 
       const house = HOUSES.reduce((a, b) => scores[a] >= scores[b] ? a : b)
 
