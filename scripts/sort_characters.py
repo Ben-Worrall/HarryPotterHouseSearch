@@ -20,7 +20,7 @@ import shutil
 import subprocess
 import sys
 
-from rubric import SYSTEM, merge, normalise, pending, prompt_for, save
+from rubric import SYSTEM, merge, normalise, pending, prompt_for, save, upsert_to_supabase
 
 GROUP_INSTRUCTIONS = """
 
@@ -91,15 +91,19 @@ def main():
                 print("Usage limit reached. Stopping; the rest will be picked up next run.")
                 break
             continue
+        newly_sorted = []
         for c in group:
             res = results.get(c["id"])
             if res:
-                chars.append(merge(c, res))
+                merged = merge(c, res)
+                chars.append(merged)
+                newly_sorted.append(merged)
                 sorted_n += 1
                 print(f"  {c['name']} -> {res['house']}")
             else:
                 skipped += 1
         save(chars)
+        upsert_to_supabase(newly_sorted)
 
     print(f"Done: {sorted_n} sorted, {skipped} skipped, {len(chars)} characters on file.")
 

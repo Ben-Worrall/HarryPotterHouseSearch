@@ -3,6 +3,11 @@ import json
 import os
 import re
 
+try:
+    import requests as _requests
+except ImportError:
+    _requests = None
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 CANDIDATES = os.path.join(HERE, "..", "data", "candidates.json")
 SITE_DATA = os.path.join(HERE, "..", "public", "data", "characters.json")
@@ -87,3 +92,31 @@ def pending(count):
     chars = load(SITE_DATA, [])
     done = {c["id"] for c in chars}
     return [c for c in candidates if c["id"] not in done][:count], chars
+
+
+def upsert_to_supabase(chars):
+    """Upsert a list of character dicts to Supabase. Silently skips if env vars are missing."""
+    if not _requests or not chars:
+        return
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
+    if not url or not key:
+        return
+    try:
+        r = _requests.post(
+            f"{url}/rest/v1/characters",
+            headers={
+                "apikey": key,
+                "Authorization": f"Bearer {key}",
+                "Content-Type": "application/json",
+                "Prefer": "resolution=merge-duplicates",
+            },
+            json=chars,
+            timeout=30,
+        )
+        if r.ok:
+            print(f"  Supabase: upserted {len(chars)} characters.")
+        else:
+            print(f"  Supabase warning: {r.status_code} {r.text[:200]}")
+    except Exception as e:
+        print(f"  Supabase warning: {e}")
