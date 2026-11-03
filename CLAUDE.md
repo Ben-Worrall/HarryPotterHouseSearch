@@ -10,7 +10,9 @@ The user (address him as "Sir") started this in a Claude chat and moved it here.
 - `serve.py` serves `public/` with the Python standard library on `0.0.0.0:8080`. Run: `python3 serve.py`.
 - Pipeline scripts are written but not yet run against live services:
   1. `scripts/fetch_characters.py` queries Wikidata for characters present in literary works or films, ranked by Wikipedia sitelinks, into `data/candidates.json`. Harry Potter and Fantastic Beasts characters are excluded because their houses are canon.
-  2. `scripts/sort_characters.py` sends each candidate to the Claude API with a fixed house rubric and merges results into `public/data/characters.json`. `--batch` uses the Message Batches API for large runs. Model is set by the `SORTING_MODEL` env var.
+  2. `scripts/sort_characters.py` sorts candidates by calling Claude Code headless (`claude -p --output-format json`), 10 characters per call, and merges results into `public/data/characters.json`. It strips `ANTHROPIC_API_KEY` from the subprocess env so usage stays on Sir's Pro plan. Stops cleanly on usage limits.
+  3. `scripts/nightly.sh` is the cron job: tops up candidates when fewer than 200 are waiting, sorts `SORT_COUNT` (default 40), commits and pushes.
+  - `scripts/rubric.py` holds the house rubric and shared helpers. `scripts/sort_with_api.py` is an optional paid-API sorter for big one-off runs; not the default.
 
 ## Decisions made in chat
 - **Hosting:** Vercel, on Sir's own account, embedded on his website. Do not add Vercel config until he says to; he said to hold that.
@@ -21,12 +23,12 @@ The user (address him as "Sir") started this in a Claude chat and moved it here.
   - The list of characters: Wikidata (free, CC0). TMDB for films and Open Library for books can fill gaps.
   - Background material: each character's Wikipedia summary, passed to Claude as grounding.
   - House, scores, traits and reasoning: written by Claude using the rubric in `sort_characters.py`.
-- **Automatic updates:** a scheduled job (likely a nightly GitHub Action) that finds characters not yet stored, pulls their Wikipedia summaries, sorts them with Claude and saves them to the database. Sorts where the top two houses are within 12 points get flagged for review.
+- **Sorting engine:** Claude Code on Sir's Pro plan, not the paid API. He chose this to avoid paying twice. Throughput is limited by Pro usage limits, so the list grows in nightly batches.
+- **Automatic updates:** a cron job on the laptop (`scripts/nightly.sh`) that finds characters not yet stored, sorts them with Claude Code and saves them. Later it will also pull Wikipedia summaries and write to Supabase. Sorts where the top two houses are within 12 points get flagged for review. The laptop must be on when it runs.
 
 ## Keys and access Sir will provide (not needed until each step)
 - GitHub repo access
 - Supabase project URL, anon key and service role key
-- Anthropic API key (pays for sorting)
 - TMDB API key (free)
 
 Store these in `.env` (gitignored). See `.env.example`. Never commit keys.
@@ -34,10 +36,10 @@ Store these in `.env` (gitignored). See `.env.example`. Never commit keys.
 ## Next steps, in order
 1. Confirm the site runs locally with `python3 serve.py`.
 2. Push to Sir's GitHub once he gives access.
-3. Test the pipeline on about 50 characters and review quality with Sir.
-4. Add Wikipedia summary grounding to `sort_characters.py`.
-5. Set up Supabase, migrate the JSON data and switch the front end to read from it.
-6. Add the scheduled update job.
+3. Run `fetch_characters.py`, then `sort_characters.py --count 30`, and review quality with Sir.
+4. Install the nightly cron job (see README) once he's happy with the results.
+5. Add Wikipedia summary grounding to `sort_characters.py`.
+6. Set up Supabase, migrate the JSON data and switch the front end to read from it.
 7. Deploy to Vercel when Sir is ready.
 
 ## Conventions

@@ -13,20 +13,34 @@ No dependencies for the site itself. It binds to `0.0.0.0`, so other devices on 
 
 ## Grow the character list
 
+Sorting runs through Claude Code on your Pro plan, so there's no API bill.
+
 ```bash
 pip install -r requirements.txt
-cp .env.example .env   # then add your keys
-export ANTHROPIC_API_KEY=sk-ant-...
+claude          # once, to sign in to Claude Code with your Pro account
 
 # 1. Pull candidates from Wikidata (best-known first)
 python3 scripts/fetch_characters.py --limit 2000
 
-# 2. Sort them with Claude
-python3 scripts/sort_characters.py --count 50            # small test run
-python3 scripts/sort_characters.py --count 2000 --batch  # bulk, cheaper
+# 2. Sort them with Claude Code (10 characters per call)
+python3 scripts/sort_characters.py --count 30
 ```
 
-Sorted characters are merged into `public/data/characters.json`. Refresh the page to see them.
+Sorted characters are merged into `public/data/characters.json`. Refresh the page to see them. If you hit your plan's usage limit, the script stops and keeps everything sorted so far; the next run carries on.
+
+### Run it every night
+
+```bash
+crontab -e
+# add this line (02:15 every night, 40 characters per run):
+15 2 * * * /full/path/to/sorting-register/scripts/nightly.sh >> /full/path/to/sorting-register/data/nightly.log 2>&1
+```
+
+`nightly.sh` tops up the candidate list when it runs low, sorts the next batch, and commits the result (and pushes, once a GitHub remote is set). Change the batch size with `SORT_COUNT=60` in the cron line. The laptop needs to be on at that time.
+
+### Optional: bulk runs through the API
+
+`scripts/sort_with_api.py` does the same job through the Anthropic API, which is billed separately from Pro. Only worth it for a big one-off jump (thousands at once).
 
 ## Layout
 
