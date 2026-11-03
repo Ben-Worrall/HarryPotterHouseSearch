@@ -132,6 +132,7 @@ export async function POST(req: NextRequest) {
   const model = getAI()
   const results: any[] = []
   const skipped: string[] = []
+  let firstError: string | null = null
 
   for (const c of pending) {
     try {
@@ -171,10 +172,18 @@ export async function POST(req: NextRequest) {
         image_url: c.image_url ?? null,
         wikipedia_summary: c.wikipedia_summary ?? null,
       })
-    } catch (e) {
+    } catch (e: any) {
       console.error(`Sort error for ${c.name}:`, e)
+      if (!firstError) firstError = e.message ?? String(e)
       skipped.push(c.name)
+      // If the very first character fails, it's almost certainly an AI config error — stop early
+      if (results.length === 0 && skipped.length === 1) break
     }
+  }
+
+  // If nothing sorted and we have an error, surface it immediately
+  if (results.length === 0 && firstError) {
+    return NextResponse.json({ error: `AI call failed: ${firstError}` }, { status: 500 })
   }
 
   if (results.length > 0) {

@@ -69,7 +69,8 @@ export default function AdminPage() {
         const data = await sortBatch(10)
         if (!data || data.error) { setStatus(`Stopped: ${data?.error ?? 'request failed'}`); break }
         if (data.message?.includes('All candidates')) { setStatus(`Finished! All ${totalSorted} characters sorted.`); break }
-        if ((data.sorted ?? 0) === 0) { setStatus(`Finished — nothing left to sort.`); break }
+        // sorted:0 with no error means genuinely nothing pending (not an AI failure)
+        if ((data.sorted ?? 0) === 0 && !data.error) { setStatus(`Finished — nothing left to sort.`); break }
 
         totalSorted += data.sorted
         calls++
