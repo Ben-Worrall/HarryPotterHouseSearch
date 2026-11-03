@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Sorting Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>The Sorting <em>Register</em></h1>
+    <div class="tag" id="count">Characters on file</div>
+  </header>
+
+  <div class="controls">
+    <input id="q" class="search" type="search" placeholder="Search a character, book or film…" autocomplete="off" aria-label="Search characters">
+    <div class="row" id="mediumRow" aria-label="Filter by source">
+      <button class="chip" data-medium="all" aria-pressed="true">All sources</button>
+      <button class="chip" data-medium="Book" aria-pressed="false">Books</button>
+      <button class="chip" data-medium="Film" aria-pressed="false">Films</button>
+    </div>
+    <div class="row" id="houseRow" aria-label="Filter by house">
+      <button class="chip" data-house="all" aria-pressed="true">Every house</button>
+      <button class="chip" data-house="Gryffindor" aria-pressed="false"><span class="dot" style="background:var(--gry)"></span>Gryffindor</button>
+      <button class="chip" data-house="Slytherin" aria-pressed="false"><span class="dot" style="background:var(--sly)"></span>Slytherin</button>
+      <button class="chip" data-house="Ravenclaw" aria-pressed="false"><span class="dot" style="background:var(--rav)"></span>Ravenclaw</button>
+      <button class="chip" data-house="Hufflepuff" aria-pressed="false"><span class="dot" style="background:var(--huf)"></span>Hufflepuff</button>
+      <span class="spacer"></span>
+      <label class="tag" for="sort">Sort</label>
+      <select id="sort"><option value="name">Name</option><option value="conf">Strongest fit</option><option value="year">Year</option></select>
+    </div>
+  </div>
+
+  <div class="tally" id="tally"></div>
+
+  <div class="main">
+    <ul class="list" id="list"></ul>
+    <article class="card" id="card" aria-live="polite"></article>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

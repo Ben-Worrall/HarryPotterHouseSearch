@@ -1,0 +1,992 @@
+[
+  {
+    "id": "elizabeth-bennet",
+    "name": "Elizabeth Bennet",
+    "source": "Pride and Prejudice",
+    "creator": "Jane Austen",
+    "year": 1813,
+    "medium": "Book",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 33,
+      "Slytherin": 7,
+      "Ravenclaw": 46,
+      "Hufflepuff": 14
+    },
+    "traits": [
+      "Wit",
+      "Sharp judgement",
+      "Independent mind"
+    ],
+    "background": "The second of five Bennet daughters in Regency England, whose family's security depends on marrying well. Her clashes with the proud Mr Darcy drive the novel.",
+    "reasoning": "Elizabeth's defining trait is her mind. She reads people quickly, enjoys argument for its own sake, and values intelligence over status. Her arc is about correcting her own misjudgement, a very Ravenclaw kind of growth: she changes her view when the evidence changes. Gryffindor runs close, since she turns down two proposals and faces down Lady Catherine without flinching."
+  },
+  {
+    "id": "sherlock-holmes",
+    "name": "Sherlock Holmes",
+    "source": "The Sherlock Holmes stories",
+    "creator": "Arthur Conan Doyle",
+    "year": 1887,
+    "medium": "Book",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 14,
+      "Slytherin": 18,
+      "Ravenclaw": 63,
+      "Hufflepuff": 5
+    },
+    "traits": [
+      "Deduction",
+      "Obsessive curiosity",
+      "Detachment"
+    ],
+    "background": "A consulting detective at 221B Baker Street who solves cases the police can't, usually narrated by his friend Dr John Watson.",
+    "reasoning": "Holmes lives for the puzzle. He treats knowledge as a toolkit, takes cases for their intellectual interest rather than the fee, and grows restless without a problem to work on. That restless hunger for answers is the core of Ravenclaw. A little Slytherin shows in his vanity and his willingness to bend rules to win."
+  },
+  {
+    "id": "jay-gatsby",
+    "name": "Jay Gatsby",
+    "source": "The Great Gatsby",
+    "creator": "F. Scott Fitzgerald",
+    "year": 1925,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 16,
+      "Slytherin": 58,
+      "Ravenclaw": 6,
+      "Hufflepuff": 20
+    },
+    "traits": [
+      "Self-invention",
+      "Ambition",
+      "Romantic obsession"
+    ],
+    "background": "A mysterious millionaire on Long Island who throws lavish parties in the hope of winning back Daisy Buchanan, the woman he loved before the war.",
+    "reasoning": "Gatsby built himself from nothing: a new name, a new history and a fortune made through shady dealings, all aimed at one goal. That single-minded drive and willingness to reinvent himself is Slytherin to the core. His devotion to Daisy has a Hufflepuff loyalty to it, but it serves his ambition rather than replacing it."
+  },
+  {
+    "id": "atticus-finch",
+    "name": "Atticus Finch",
+    "source": "To Kill a Mockingbird",
+    "creator": "Harper Lee",
+    "year": 1960,
+    "medium": "Book & film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 52,
+      "Slytherin": 3,
+      "Ravenclaw": 22,
+      "Hufflepuff": 23
+    },
+    "traits": [
+      "Moral courage",
+      "Fairness",
+      "Quiet integrity"
+    ],
+    "background": "A lawyer in 1930s Alabama who defends a Black man falsely accused of rape, while raising his two children, Scout and Jem, alone.",
+    "reasoning": "Atticus shows the kind of bravery Gryffindor values most: standing up for what is right when the whole town is against you. He takes a case he knows he will lose and sits guard outside a jail facing a mob. His fairness and patience pull toward Hufflepuff, but his defining choice is a brave one."
+  },
+  {
+    "id": "jane-eyre",
+    "name": "Jane Eyre",
+    "source": "Jane Eyre",
+    "creator": "Charlotte Brontë",
+    "year": 1847,
+    "medium": "Book & film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 45,
+      "Slytherin": 6,
+      "Ravenclaw": 19,
+      "Hufflepuff": 30
+    },
+    "traits": [
+      "Self-respect",
+      "Defiance",
+      "Principle"
+    ],
+    "background": "An orphan raised in cruelty who becomes a governess at Thornfield Hall and falls in love with its brooding owner, Mr Rochester.",
+    "reasoning": "From childhood Jane refuses to be crushed, speaking back to her aunt and to cruel schoolmasters. As an adult she walks away from the man she loves with nothing, because staying would cost her self-respect. That willingness to risk everything on principle is Gryffindor. Her steady work ethic gives Hufflepuff a solid second place."
+  },
+  {
+    "id": "samwise-gamgee",
+    "name": "Samwise Gamgee",
+    "source": "The Lord of the Rings",
+    "creator": "J. R. R. Tolkien",
+    "year": 1954,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 30,
+      "Slytherin": 2,
+      "Ravenclaw": 6,
+      "Hufflepuff": 62
+    },
+    "traits": [
+      "Loyalty",
+      "Endurance",
+      "Humility"
+    ],
+    "background": "Frodo's gardener and companion, who follows him from the Shire all the way to Mount Doom.",
+    "reasoning": "Sam is the clearest Hufflepuff in fiction. He asks for no glory, does the cooking and carrying, and refuses to leave Frodo's side even when ordered to. His courage is real, but it springs from loyalty rather than a thirst for adventure. He even gives up the Ring easily, which shows how little ambition he holds."
+  },
+  {
+    "id": "aragorn",
+    "name": "Aragorn",
+    "source": "The Lord of the Rings",
+    "creator": "J. R. R. Tolkien",
+    "year": 1954,
+    "medium": "Book & film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 54,
+      "Slytherin": 10,
+      "Ravenclaw": 16,
+      "Hufflepuff": 20
+    },
+    "traits": [
+      "Leadership",
+      "Valour",
+      "Duty"
+    ],
+    "background": "The heir of Isildur, living as a wandering Ranger, who must step forward to claim the throne of Gondor.",
+    "reasoning": "Aragorn leads from the front, from Weathertop to the Paths of the Dead to the Black Gate. He accepts danger as the price of duty and inspires others by example. His long years of humble service add some Hufflepuff, but the decisive moments of his story are acts of courage."
+  },
+  {
+    "id": "bilbo-baggins",
+    "name": "Bilbo Baggins",
+    "source": "The Hobbit",
+    "creator": "J. R. R. Tolkien",
+    "year": 1937,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 26,
+      "Slytherin": 14,
+      "Ravenclaw": 12,
+      "Hufflepuff": 48
+    },
+    "traits": [
+      "Comfort-loving",
+      "Decency",
+      "Hidden pluck"
+    ],
+    "background": "A respectable hobbit dragged on a quest with thirteen dwarves to reclaim treasure from the dragon Smaug.",
+    "reasoning": "Bilbo begins as a homebody who values comfort, food and good company. He earns his place through steady effort and simple decency, most clearly when he hands over the Arkenstone to prevent a war. His later boldness gives him a Gryffindor streak, and his riddling has a touch of cunning, but his heart is Hufflepuff."
+  },
+  {
+    "id": "katniss-everdeen",
+    "name": "Katniss Everdeen",
+    "source": "The Hunger Games",
+    "creator": "Suzanne Collins",
+    "year": 2008,
+    "medium": "Book & film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 44,
+      "Slytherin": 28,
+      "Ravenclaw": 8,
+      "Hufflepuff": 20
+    },
+    "traits": [
+      "Self-sacrifice",
+      "Survival instinct",
+      "Defiance"
+    ],
+    "background": "A teenager from the poorest district of Panem who volunteers in her sister's place for a televised fight to the death.",
+    "reasoning": "Her story starts with a brave act: stepping forward in place of her sister. She later defies the Capitol in front of the whole country. Slytherin is a strong second, because she is resourceful, guarded and willing to play the game to survive. But she uses those skills to protect others, which tips her to Gryffindor."
+  },
+  {
+    "id": "lady-macbeth",
+    "name": "Lady Macbeth",
+    "source": "Macbeth",
+    "creator": "William Shakespeare",
+    "year": 1606,
+    "medium": "Book",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 18,
+      "Slytherin": 66,
+      "Ravenclaw": 10,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Ambition",
+      "Ruthlessness",
+      "Will"
+    ],
+    "background": "The wife of the Scottish nobleman Macbeth, who urges him to murder King Duncan and seize the crown.",
+    "reasoning": "Lady Macbeth calls on dark forces to strip away her softness so she can pursue power. She plans the murder, shames her husband into doing it and covers it up. That raw hunger for power and the cold strategy behind it is Slytherin in its darkest form. Her nerve is real, but it serves ambition alone."
+  },
+  {
+    "id": "hercule-poirot",
+    "name": "Hercule Poirot",
+    "source": "The Hercule Poirot novels",
+    "creator": "Agatha Christie",
+    "year": 1920,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 10,
+      "Slytherin": 22,
+      "Ravenclaw": 58,
+      "Hufflepuff": 10
+    },
+    "traits": [
+      "Order and method",
+      "Vanity",
+      "Psychology"
+    ],
+    "background": "A retired Belgian police officer turned private detective, famous for his moustache and his 'little grey cells'.",
+    "reasoning": "Poirot solves crimes through careful thought and an understanding of human nature, rather than chasing clues across the country. He prizes order, method and intellect above everything. His vanity and love of a dramatic reveal add some Slytherin flair."
+  },
+  {
+    "id": "matilda",
+    "name": "Matilda Wormwood",
+    "source": "Matilda",
+    "creator": "Roald Dahl",
+    "year": 1988,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 30,
+      "Slytherin": 8,
+      "Ravenclaw": 52,
+      "Hufflepuff": 10
+    },
+    "traits": [
+      "Bookishness",
+      "Justice",
+      "Cleverness"
+    ],
+    "background": "A brilliant five-year-old who teaches herself to read, is ignored by her awful parents and develops telekinetic powers.",
+    "reasoning": "Matilda devours a library before most children can read and treats books as an escape and an education. She is clever, quick and creative, which places her firmly in Ravenclaw. Her bold pranks against her parents and her stand against Miss Trunchbull give Gryffindor a strong showing."
+  },
+  {
+    "id": "long-john-silver",
+    "name": "Long John Silver",
+    "source": "Treasure Island",
+    "creator": "Robert Louis Stevenson",
+    "year": 1883,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 16,
+      "Slytherin": 64,
+      "Ravenclaw": 10,
+      "Hufflepuff": 10
+    },
+    "traits": [
+      "Charm",
+      "Duplicity",
+      "Survival"
+    ],
+    "background": "A one-legged ship's cook who is secretly the leader of a band of pirates seeking buried treasure.",
+    "reasoning": "Silver is charming, persuasive and always looking out for himself. He switches sides whenever it suits him and talks his way out of trouble again and again. That flexible cunning and focus on self-interest make him a natural Slytherin."
+  },
+  {
+    "id": "don-quixote",
+    "name": "Don Quixote",
+    "source": "Don Quixote",
+    "creator": "Miguel de Cervantes",
+    "year": 1605,
+    "medium": "Book",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 58,
+      "Slytherin": 6,
+      "Ravenclaw": 18,
+      "Hufflepuff": 18
+    },
+    "traits": [
+      "Idealism",
+      "Recklessness",
+      "Chivalry"
+    ],
+    "background": "An aging Spanish gentleman who reads too many tales of chivalry, declares himself a knight and sets out to right wrongs.",
+    "reasoning": "Quixote charges at windmills he believes are giants. His bravery has no limit and very little sense behind it, which is Gryffindor at its most extreme. He lives by a code of honour, and that idealism is the whole engine of his story."
+  },
+  {
+    "id": "jo-march",
+    "name": "Jo March",
+    "source": "Little Women",
+    "creator": "Louisa May Alcott",
+    "year": 1868,
+    "medium": "Book & film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 44,
+      "Slytherin": 10,
+      "Ravenclaw": 30,
+      "Hufflepuff": 16
+    },
+    "traits": [
+      "Ambition to write",
+      "Temper",
+      "Independence"
+    ],
+    "background": "The second of four March sisters in Civil War-era Massachusetts, a fiery tomboy who dreams of becoming a writer.",
+    "reasoning": "Jo rejects the expectations placed on women of her time, cuts off her hair to raise money and turns down a comfortable marriage. Her boldness and independence are Gryffindor. Her love of books and stories makes Ravenclaw a clear second."
+  },
+  {
+    "id": "count-dracula",
+    "name": "Count Dracula",
+    "source": "Dracula",
+    "creator": "Bram Stoker",
+    "year": 1897,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 10,
+      "Slytherin": 68,
+      "Ravenclaw": 16,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Predatory will",
+      "Aristocratic pride",
+      "Patience"
+    ],
+    "background": "An ancient Transylvanian vampire who moves to England to spread his curse and prey on new victims.",
+    "reasoning": "Dracula plans his move to London for years, buying property and studying English customs. He is proud of his noble bloodline and seeks to extend his power. That patient scheming and pride in lineage are classic Slytherin traits."
+  },
+  {
+    "id": "victor-frankenstein",
+    "name": "Victor Frankenstein",
+    "source": "Frankenstein",
+    "creator": "Mary Shelley",
+    "year": 1818,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 12,
+      "Slytherin": 30,
+      "Ravenclaw": 52,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Scientific obsession",
+      "Hubris",
+      "Guilt"
+    ],
+    "background": "A young scientist who discovers how to give life to dead matter, then abandons the creature he creates.",
+    "reasoning": "Victor's downfall comes from a hunger for knowledge that ignores every warning. He works in secret, cuts himself off from family and pushes past moral limits for discovery. That is the dark side of Ravenclaw. His desire for fame as a creator adds a Slytherin thread."
+  },
+  {
+    "id": "jean-valjean",
+    "name": "Jean Valjean",
+    "source": "Les Misérables",
+    "creator": "Victor Hugo",
+    "year": 1862,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 30,
+      "Slytherin": 4,
+      "Ravenclaw": 8,
+      "Hufflepuff": 58
+    },
+    "traits": [
+      "Mercy",
+      "Hard work",
+      "Redemption"
+    ],
+    "background": "A former convict who builds a new life after a bishop's act of kindness, while being hunted by the police inspector Javert.",
+    "reasoning": "After his release, Valjean devotes his life to honest work and to others: running a factory fairly, raising the orphan Cosette and sparing Javert's life. His goodness is patient and steady rather than showy. He has real courage, but his defining trait is a deep sense of duty to others."
+  },
+  {
+    "id": "lisbeth-salander",
+    "name": "Lisbeth Salander",
+    "source": "The Girl with the Dragon Tattoo",
+    "creator": "Stieg Larsson",
+    "year": 2005,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 26,
+      "Slytherin": 24,
+      "Ravenclaw": 44,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Hacking genius",
+      "Self-reliance",
+      "Fierce justice"
+    ],
+    "background": "A gifted, antisocial hacker in Sweden who teams up with a journalist to investigate a decades-old disappearance.",
+    "reasoning": "Salander's power lies in her mind. She has a photographic memory, breaks into any system and solves problems others can't. She has a cunning, vengeful streak and plenty of nerve, but her intellect is what sets her apart."
+  },
+  {
+    "id": "paddington",
+    "name": "Paddington Bear",
+    "source": "Paddington",
+    "creator": "Michael Bond",
+    "year": 1958,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 18,
+      "Slytherin": 2,
+      "Ravenclaw": 10,
+      "Hufflepuff": 70
+    },
+    "traits": [
+      "Politeness",
+      "Kindness",
+      "Good intentions"
+    ],
+    "background": "A small bear from darkest Peru who arrives at a London train station with a suitcase and a label asking someone to look after him.",
+    "reasoning": "Paddington always tries to do the right thing, is polite to everyone and believes the best of people. His kindness changes those around him. His mishaps come from good intentions, never selfishness. He is about as Hufflepuff as a character can be."
+  },
+  {
+    "id": "luke-skywalker",
+    "name": "Luke Skywalker",
+    "source": "Star Wars",
+    "creator": "George Lucas",
+    "year": 1977,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 60,
+      "Slytherin": 6,
+      "Ravenclaw": 10,
+      "Hufflepuff": 24
+    },
+    "traits": [
+      "Hope",
+      "Daring",
+      "Faith in others"
+    ],
+    "background": "A farm boy on the desert planet Tatooine who joins a rebellion and learns the ways of the Jedi.",
+    "reasoning": "Luke leaves home to rescue a princess, flies into the Death Star trench and walks into the Emperor's throne room alone to save his father. He acts on courage and hope. His belief in the good in others gives him some Hufflepuff warmth, but bravery drives him."
+  },
+  {
+    "id": "darth-vader",
+    "name": "Darth Vader",
+    "source": "Star Wars",
+    "creator": "George Lucas",
+    "year": 1977,
+    "medium": "Film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 22,
+      "Slytherin": 62,
+      "Ravenclaw": 10,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Power",
+      "Fear of loss",
+      "Iron control"
+    ],
+    "background": "A Sith Lord and the Emperor's enforcer, once the Jedi Anakin Skywalker.",
+    "reasoning": "Vader's fall came from a desire for power great enough to stop the people he loved from dying. He seeks to overthrow the Emperor and rule the galaxy with his son. That hunger for power and control is Slytherin. His final act, saving Luke, recalls the Gryffindor he once was."
+  },
+  {
+    "id": "yoda",
+    "name": "Yoda",
+    "source": "Star Wars",
+    "creator": "George Lucas",
+    "year": 1980,
+    "medium": "Film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 14,
+      "Slytherin": 6,
+      "Ravenclaw": 62,
+      "Hufflepuff": 18
+    },
+    "traits": [
+      "Wisdom",
+      "Patience",
+      "Teaching"
+    ],
+    "background": "An ancient Jedi Master hiding in exile on the swamp planet Dagobah, who trains Luke.",
+    "reasoning": "Yoda values wisdom, insight and patience above action. He teaches through riddles and questions rather than orders. His centuries of learning and deep understanding of the Force place him in Ravenclaw."
+  },
+  {
+    "id": "leia-organa",
+    "name": "Leia Organa",
+    "source": "Star Wars",
+    "creator": "George Lucas",
+    "year": 1977,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 50,
+      "Slytherin": 22,
+      "Ravenclaw": 16,
+      "Hufflepuff": 12
+    },
+    "traits": [
+      "Leadership",
+      "Defiance",
+      "Quick thinking"
+    ],
+    "background": "A princess and senator from Alderaan who is a leader of the Rebel Alliance against the Empire.",
+    "reasoning": "Leia resists torture, insults her captors and takes charge of her own rescue. She leads the rebellion from the front. Her political skill and sharp tongue add a Slytherin edge, but her defining trait is fearless resistance."
+  },
+  {
+    "id": "indiana-jones",
+    "name": "Indiana Jones",
+    "source": "Indiana Jones",
+    "creator": "George Lucas & Steven Spielberg",
+    "year": 1981,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 48,
+      "Slytherin": 18,
+      "Ravenclaw": 26,
+      "Hufflepuff": 8
+    },
+    "traits": [
+      "Daring",
+      "Improvisation",
+      "Scholarship"
+    ],
+    "background": "An archaeology professor who travels the world hunting for legendary artefacts, often racing Nazis to them.",
+    "reasoning": "Indy throws himself into danger at every turn, from collapsing temples to moving trucks. He improvises his way through. His learning gives Ravenclaw a real claim, but he is much happier in the field than in the classroom, which points to Gryffindor."
+  },
+  {
+    "id": "michael-corleone",
+    "name": "Michael Corleone",
+    "source": "The Godfather",
+    "creator": "Mario Puzo",
+    "year": 1972,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 14,
+      "Slytherin": 64,
+      "Ravenclaw": 14,
+      "Hufflepuff": 8
+    },
+    "traits": [
+      "Calculation",
+      "Family power",
+      "Coldness"
+    ],
+    "background": "The youngest son of a Mafia boss who tries to stay out of the family business, then becomes its ruthless head.",
+    "reasoning": "Michael transforms from war hero to strategist. He plans the murder of the family's enemies in one sweep and protects the family's power at any cost, even to his own brother. That calm, calculating ambition makes him Slytherin."
+  },
+  {
+    "id": "forrest-gump",
+    "name": "Forrest Gump",
+    "source": "Forrest Gump",
+    "creator": "Winston Groom",
+    "year": 1994,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 26,
+      "Slytherin": 2,
+      "Ravenclaw": 4,
+      "Hufflepuff": 68
+    },
+    "traits": [
+      "Loyalty",
+      "Sincerity",
+      "Persistence"
+    ],
+    "background": "A kind-hearted man from Alabama with a low IQ who stumbles through key moments of 20th-century American history.",
+    "reasoning": "Forrest succeeds through loyalty, honesty and hard work. He stays devoted to Jenny, keeps his promise to Bubba and runs across the country simply because he wants to. He has courage in Vietnam, but his story is about steady goodness."
+  },
+  {
+    "id": "ellen-ripley",
+    "name": "Ellen Ripley",
+    "source": "Alien",
+    "creator": "Dan O'Bannon & Ridley Scott",
+    "year": 1979,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 54,
+      "Slytherin": 8,
+      "Ravenclaw": 22,
+      "Hufflepuff": 16
+    },
+    "traits": [
+      "Nerve",
+      "Resourcefulness",
+      "Protectiveness"
+    ],
+    "background": "Warrant officer on the cargo ship Nostromo, who becomes the last survivor facing a deadly alien creature.",
+    "reasoning": "Ripley keeps her head in a nightmare. She stands up to her superiors, goes back into danger to save others, and faces the creature directly. Her practical problem-solving earns Ravenclaw some points, but courage under pressure is her defining quality."
+  },
+  {
+    "id": "hannibal-lecter",
+    "name": "Hannibal Lecter",
+    "source": "The Silence of the Lambs",
+    "creator": "Thomas Harris",
+    "year": 1988,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 6,
+      "Slytherin": 54,
+      "Ravenclaw": 38,
+      "Hufflepuff": 2
+    },
+    "traits": [
+      "Manipulation",
+      "Refinement",
+      "Brilliance"
+    ],
+    "background": "A brilliant psychiatrist and cannibalistic serial killer who helps FBI trainee Clarice Starling hunt another killer.",
+    "reasoning": "Lecter is a master manipulator who plays mind games with everyone and always has a plan. His refined tastes and sense of superiority fit Slytherin. His formidable intellect makes Ravenclaw a close second, but he uses that mind as a weapon."
+  },
+  {
+    "id": "marty-mcfly",
+    "name": "Marty McFly",
+    "source": "Back to the Future",
+    "creator": "Robert Zemeckis & Bob Gale",
+    "year": 1985,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 52,
+      "Slytherin": 14,
+      "Ravenclaw": 8,
+      "Hufflepuff": 26
+    },
+    "traits": [
+      "Impulsiveness",
+      "Courage",
+      "Pride"
+    ],
+    "background": "A teenager accidentally sent back to 1955 in a time-travelling DeLorean, who must make sure his parents fall in love.",
+    "reasoning": "Marty jumps into situations without much thought and hates being called a coward. He stands up to bullies and takes huge risks to fix the timeline. That impulsive bravery is pure Gryffindor."
+  },
+  {
+    "id": "doc-brown",
+    "name": "Doc Brown",
+    "source": "Back to the Future",
+    "creator": "Robert Zemeckis & Bob Gale",
+    "year": 1985,
+    "medium": "Film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 22,
+      "Slytherin": 6,
+      "Ravenclaw": 62,
+      "Hufflepuff": 10
+    },
+    "traits": [
+      "Invention",
+      "Eccentricity",
+      "Enthusiasm"
+    ],
+    "background": "An eccentric scientist who invents a time machine out of a DeLorean sports car.",
+    "reasoning": "Doc spends decades and his entire fortune on his inventions. He is brilliant, eccentric and driven by curiosity rather than money. That's Ravenclaw through and through."
+  },
+  {
+    "id": "woody",
+    "name": "Woody",
+    "source": "Toy Story",
+    "creator": "Pixar",
+    "year": 1995,
+    "medium": "Film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 24,
+      "Slytherin": 14,
+      "Ravenclaw": 6,
+      "Hufflepuff": 56
+    },
+    "traits": [
+      "Loyalty",
+      "Leadership",
+      "Jealousy"
+    ],
+    "background": "A pull-string cowboy doll who is the leader of the toys in Andy's room.",
+    "reasoning": "Woody's every action comes back to loyalty: to Andy and to his friends. He risks everything to bring lost toys home. His early jealousy of Buzz shows a Slytherin streak, but his devotion is what defines him."
+  },
+  {
+    "id": "buzz-lightyear",
+    "name": "Buzz Lightyear",
+    "source": "Toy Story",
+    "creator": "Pixar",
+    "year": 1995,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 56,
+      "Slytherin": 8,
+      "Ravenclaw": 8,
+      "Hufflepuff": 28
+    },
+    "traits": [
+      "Heroism",
+      "Confidence",
+      "Duty"
+    ],
+    "background": "A space ranger action figure who at first believes he is a real space hero.",
+    "reasoning": "Buzz is brave to a fault, always ready to leap into a rescue. Even after he learns he's a toy, he keeps acting heroically for his friends. His heroic sense of self and courage point straight to Gryffindor."
+  },
+  {
+    "id": "jack-sparrow",
+    "name": "Captain Jack Sparrow",
+    "source": "Pirates of the Caribbean",
+    "creator": "Disney",
+    "year": 2003,
+    "medium": "Film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 18,
+      "Slytherin": 56,
+      "Ravenclaw": 20,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Trickery",
+      "Self-interest",
+      "Luck"
+    ],
+    "background": "A pirate captain forever trying to win back his ship, the Black Pearl.",
+    "reasoning": "Jack constantly bargains, betrays and talks his way out of trouble, always one step ahead. He looks out for himself first. That cunning and self-interest are Slytherin, with enough cleverness to give Ravenclaw a nod."
+  },
+  {
+    "id": "tony-stark",
+    "name": "Tony Stark",
+    "source": "Iron Man",
+    "creator": "Marvel Studios",
+    "year": 2008,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 40,
+      "Slytherin": 24,
+      "Ravenclaw": 32,
+      "Hufflepuff": 4
+    },
+    "traits": [
+      "Genius",
+      "Arrogance",
+      "Self-sacrifice"
+    ],
+    "background": "A billionaire weapons maker who builds an armoured suit and becomes the hero Iron Man.",
+    "reasoning": "Tony is a genius and an egotist, so Ravenclaw and Slytherin both have strong claims. But his arc is defined by brave choices: flying a nuclear missile into a portal and ultimately sacrificing himself to save the universe. That tips him into Gryffindor."
+  },
+  {
+    "id": "wednesday-addams",
+    "name": "Wednesday Addams",
+    "source": "The Addams Family",
+    "creator": "Charles Addams",
+    "year": 1991,
+    "medium": "Film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 18,
+      "Slytherin": 46,
+      "Ravenclaw": 30,
+      "Hufflepuff": 6
+    },
+    "traits": [
+      "Deadpan wit",
+      "Scheming",
+      "Self-possession"
+    ],
+    "background": "The macabre daughter of the Addams family, known for her deadpan humour and fascination with death.",
+    "reasoning": "Wednesday is cool, calculating and unbothered by what others think. She plots elaborate revenge and takes delight in outwitting people. Her sharp mind gives Ravenclaw a solid claim, but her scheming tips her into Slytherin."
+  },
+  {
+    "id": "amelie",
+    "name": "Amélie Poulain",
+    "source": "Amélie",
+    "creator": "Jean-Pierre Jeunet",
+    "year": 2001,
+    "medium": "Film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 12,
+      "Slytherin": 14,
+      "Ravenclaw": 24,
+      "Hufflepuff": 50
+    },
+    "traits": [
+      "Kindness",
+      "Imagination",
+      "Shyness"
+    ],
+    "background": "A shy waitress in Montmartre, Paris, who secretly arranges small acts of kindness for the people around her.",
+    "reasoning": "Amélie devotes herself to making others happy in quiet ways, without seeking credit. Her inventive schemes show Ravenclaw creativity, but her heart is with the people she helps."
+  },
+  {
+    "id": "chihiro",
+    "name": "Chihiro Ogino",
+    "source": "Spirited Away",
+    "creator": "Hayao Miyazaki",
+    "year": 2001,
+    "medium": "Film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 34,
+      "Slytherin": 2,
+      "Ravenclaw": 6,
+      "Hufflepuff": 58
+    },
+    "traits": [
+      "Hard work",
+      "Loyalty",
+      "Growing courage"
+    ],
+    "background": "A ten-year-old girl trapped in a spirit world who must work in a bathhouse to save her parents.",
+    "reasoning": "Chihiro begins scared and sulky but earns her way through hard, unglamorous work. She stays loyal to Haku and to her parents and turns down gold when it's offered. Her courage grows across the film, making Gryffindor a close second."
+  },
+  {
+    "id": "ferris-bueller",
+    "name": "Ferris Bueller",
+    "source": "Ferris Bueller's Day Off",
+    "creator": "John Hughes",
+    "year": 1986,
+    "medium": "Film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 22,
+      "Slytherin": 54,
+      "Ravenclaw": 16,
+      "Hufflepuff": 8
+    },
+    "traits": [
+      "Charm",
+      "Manipulation",
+      "Confidence"
+    ],
+    "background": "A charismatic high-school student who fakes being sick to take the day off and explore Chicago with his friends.",
+    "reasoning": "Ferris charms and fools his parents, teachers and the entire school. He plans the day like a heist and always gets away with it. That smooth cunning and self-confidence are Slytherin."
+  },
+  {
+    "id": "rocky-balboa",
+    "name": "Rocky Balboa",
+    "source": "Rocky",
+    "creator": "Sylvester Stallone",
+    "year": 1976,
+    "medium": "Film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 38,
+      "Slytherin": 4,
+      "Ravenclaw": 2,
+      "Hufflepuff": 56
+    },
+    "traits": [
+      "Grit",
+      "Humility",
+      "Endurance"
+    ],
+    "background": "A small-time boxer from Philadelphia who gets a shot at the world heavyweight title.",
+    "reasoning": "Rocky's story is about hard work and endurance, not talent or cunning. His goal is simply to go the distance. He is humble and kind, which make him a Hufflepuff. His sheer guts in the ring give Gryffindor a strong showing."
+  },
+  {
+    "id": "miranda-priestly",
+    "name": "Miranda Priestly",
+    "source": "The Devil Wears Prada",
+    "creator": "Lauren Weisberger",
+    "year": 2006,
+    "medium": "Book & film",
+    "house": "Slytherin",
+    "scores": {
+      "Gryffindor": 10,
+      "Slytherin": 66,
+      "Ravenclaw": 20,
+      "Hufflepuff": 4
+    },
+    "traits": [
+      "Power",
+      "Perfectionism",
+      "Ruthlessness"
+    ],
+    "background": "The feared editor-in-chief of a top fashion magazine.",
+    "reasoning": "Miranda is ambitious, demanding and always in control. She protects her position at any cost, even sacrificing a loyal colleague. That ruthless ambition and strategic mind make her Slytherin."
+  },
+  {
+    "id": "mulan",
+    "name": "Mulan",
+    "source": "Mulan",
+    "creator": "Disney",
+    "year": 1998,
+    "medium": "Film",
+    "house": "Gryffindor",
+    "scores": {
+      "Gryffindor": 56,
+      "Slytherin": 8,
+      "Ravenclaw": 16,
+      "Hufflepuff": 20
+    },
+    "traits": [
+      "Bravery",
+      "Family duty",
+      "Ingenuity"
+    ],
+    "background": "A young woman who disguises herself as a man to take her father's place in the army.",
+    "reasoning": "Mulan risks death to protect her father and her country. On the battlefield she takes huge risks to save her comrades. Her clever tactics earn Ravenclaw a nod, but her defining trait is courage."
+  },
+  {
+    "id": "willy-wonka",
+    "name": "Willy Wonka",
+    "source": "Charlie and the Chocolate Factory",
+    "creator": "Roald Dahl",
+    "year": 1964,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 12,
+      "Slytherin": 20,
+      "Ravenclaw": 60,
+      "Hufflepuff": 8
+    },
+    "traits": [
+      "Invention",
+      "Whimsy",
+      "Eccentricity"
+    ],
+    "background": "A reclusive chocolatier who invites five lucky children into his mysterious factory.",
+    "reasoning": "Wonka is an inventor above all: everlasting gobstoppers, fizzy lifting drinks and a glass elevator. He prizes creativity and imagination. His tests of the children's character show a cunning streak, but his heart belongs to invention."
+  },
+  {
+    "id": "frodo-baggins",
+    "name": "Frodo Baggins",
+    "source": "The Lord of the Rings",
+    "creator": "J. R. R. Tolkien",
+    "year": 1954,
+    "medium": "Book & film",
+    "house": "Hufflepuff",
+    "scores": {
+      "Gryffindor": 40,
+      "Slytherin": 4,
+      "Ravenclaw": 10,
+      "Hufflepuff": 46
+    },
+    "traits": [
+      "Endurance",
+      "Sacrifice",
+      "Compassion"
+    ],
+    "background": "Bilbo's heir, who inherits the One Ring and must carry it to Mordor to destroy it.",
+    "reasoning": "Frodo volunteers to carry the Ring, which is a brave act. But what defines him is quiet endurance and mercy, especially towards Gollum. He bears the burden steadily and asks for no reward. It is a close call with Gryffindor."
+  },
+  {
+    "id": "gandalf",
+    "name": "Gandalf",
+    "source": "The Lord of the Rings",
+    "creator": "J. R. R. Tolkien",
+    "year": 1937,
+    "medium": "Book & film",
+    "house": "Ravenclaw",
+    "scores": {
+      "Gryffindor": 34,
+      "Slytherin": 8,
+      "Ravenclaw": 46,
+      "Hufflepuff": 12
+    },
+    "traits": [
+      "Wisdom",
+      "Foresight",
+      "Guidance"
+    ],
+    "background": "A wandering wizard who guides the free peoples of Middle-earth against Sauron.",
+    "reasoning": "Gandalf works through knowledge and counsel rather than force, researching the Ring's history and guiding others to their choices. His stand against the Balrog gives Gryffindor a strong claim, but his main role is as a wise mentor."
+  }
+]
