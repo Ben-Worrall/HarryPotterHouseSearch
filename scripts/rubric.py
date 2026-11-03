@@ -65,10 +65,15 @@ def parse_object(text):
 
 
 def merge(c, result):
-    return {
+    merged = {
         "id": c["id"], "name": c["name"], "source": c["source"], "creator": c.get("creator", ""),
         "year": c.get("year"), "medium": c["medium"], **result,
     }
+    if c.get("image_url"):
+        merged["image_url"] = c["image_url"]
+    if c.get("wikipedia_summary"):
+        merged["wikipedia_summary"] = c["wikipedia_summary"]
+    return merged
 
 
 def load(path, default):
