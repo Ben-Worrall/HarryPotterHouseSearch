@@ -22,7 +22,7 @@ The user (address him as "Sir") started this in a Claude chat and moved it here.
 - **Where character information comes from:**
   - The list of characters: Wikidata (free, CC0). TMDB for films and Open Library for books can fill gaps.
   - Background material: each character's Wikipedia summary, passed to Claude as grounding.
-  - House, scores, traits and reasoning: written by Claude using the rubric in `sort_characters.py`.
+  - House, scores, traits and reasoning: written by Claude using the rubric in `scripts/rubric.py`.
 - **Sorting engine:** Claude Code on Sir's Pro plan, not the paid API. He chose this to avoid paying twice. Throughput is limited by Pro usage limits, so the list grows in nightly batches.
 - **Automatic updates:** a cron job on the laptop (`scripts/nightly.sh`) that finds characters not yet stored, sorts them with Claude Code and saves them. Later it will also pull Wikipedia summaries and write to Supabase. Sorts where the top two houses are within 12 points get flagged for review. The laptop must be on when it runs.
 
