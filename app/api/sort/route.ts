@@ -133,6 +133,7 @@ export async function POST(req: NextRequest) {
   const results: any[] = []
   const skipped: string[] = []
   let firstError: string | null = null
+  let firstRawText: string | null = null
 
   for (const c of pending) {
     try {
@@ -147,7 +148,11 @@ export async function POST(req: NextRequest) {
       const { text } = await generateText({ model, system: SYSTEM, prompt, maxOutputTokens: 500 })
 
       const match = text.match(/\{[\s\S]*\}/)
-      if (!match) { skipped.push(c.name); continue }
+      if (!match) {
+        if (!firstRawText) firstRawText = text.slice(0, 300)
+        skipped.push(c.name)
+        break // stop after first bad response — almost certainly a config issue
+      }
 
       const data = JSON.parse(match[0])
       if (data.unknown) { skipped.push(c.name); continue }
@@ -181,9 +186,10 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // If nothing sorted and we have an error, surface it immediately
-  if (results.length === 0 && firstError) {
-    return NextResponse.json({ error: `AI call failed: ${firstError}` }, { status: 500 })
+  // Surface any failure immediately so the admin page can show it
+  if (results.length === 0) {
+    if (firstError) return NextResponse.json({ error: `AI call failed: ${firstError}` }, { status: 500 })
+    if (firstRawText !== null) return NextResponse.json({ error: `AI returned unexpected response (not JSON). Raw response: "${firstRawText}"` }, { status: 500 })
   }
 
   if (results.length > 0) {
