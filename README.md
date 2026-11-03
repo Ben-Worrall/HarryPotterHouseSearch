@@ -14,7 +14,8 @@ No dependencies for the site itself. It binds to `0.0.0.0`, so other devices on 
 ## Grow the character list
 
 ```bash
-pip install requests anthropic
+pip install -r requirements.txt
+cp .env.example .env   # then add your keys
 export ANTHROPIC_API_KEY=sk-ant-...
 
 # 1. Pull candidates from Wikidata (best-known first)
