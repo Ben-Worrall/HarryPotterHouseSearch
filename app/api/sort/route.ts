@@ -25,11 +25,19 @@ Return ONLY a JSON object with these keys:
 
 Write in plain, direct English. If you do not know the character well enough, return {"unknown": true}.`
 
-function getSupabase() {
+// Read-only client using anon key (always available)
+function getSupabaseRead() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   )
+}
+
+// Write client using service role key (needed for upserts)
+function getSupabaseAdmin() {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!key) throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set in Vercel env vars')
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, key)
 }
 
 function getAI() {
@@ -65,18 +73,30 @@ function normalise(data: any): Record<House, number> | null {
   }
 }
 
-// GET /api/sort — return stats
+// GET /api/sort — return stats + env diagnostics
 export async function GET() {
-  const supabase = getSupabase()
+  const supabase = getSupabaseRead()
   const candidates = loadCandidates()
 
-  const { data: existing } = await supabase.from('characters').select('id')
-  const sortedIds = new Set(existing?.map((c: any) => c.id) ?? [])
+  const { data: existing, error } = await supabase.from('characters').select('id')
+  if (error) {
+    return NextResponse.json({
+      error: `Supabase error: ${error.message}`,
+      hint: 'Check that NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set in Vercel and the characters table exists.',
+    }, { status: 500 })
+  }
 
+  const sortedIds = new Set(existing?.map((c: any) => c.id) ?? [])
   return NextResponse.json({
     total: candidates.length,
     sorted: sortedIds.size,
     pending: candidates.filter((c: any) => !sortedIds.has(c.id)).length,
+    envCheck: {
+      supabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      supabaseAnon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      supabaseAdmin: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      vercelAI: !!process.env.VERCEL_AI_API_KEY,
+    },
   })
 }
 
@@ -85,14 +105,23 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}))
   const batchSize = Math.min(parseInt(body.count ?? 5), 20)
 
-  const supabase = getSupabase()
+  let supabase: ReturnType<typeof getSupabaseAdmin>
+  try { supabase = getSupabaseAdmin() }
+  catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }) }
+
+  const vercelAIKey = process.env.VERCEL_AI_API_KEY
+  if (!vercelAIKey) {
+    return NextResponse.json({ error: 'VERCEL_AI_API_KEY is not set in Vercel env vars' }, { status: 500 })
+  }
+
   const candidates = loadCandidates()
 
   if (candidates.length === 0) {
     return NextResponse.json({ error: 'No candidates found. candidates.json missing from deployment.' }, { status: 500 })
   }
 
-  const { data: existing } = await supabase.from('characters').select('id')
+  const { data: existing, error: fetchErr } = await supabase.from('characters').select('id')
+  if (fetchErr) return NextResponse.json({ error: `Supabase read error: ${fetchErr.message}` }, { status: 500 })
   const sortedIds = new Set(existing?.map((c: any) => c.id) ?? [])
 
   const pending = candidates.filter((c: any) => !sortedIds.has(c.id)).slice(0, batchSize)
@@ -149,8 +178,8 @@ export async function POST(req: NextRequest) {
   }
 
   if (results.length > 0) {
-    const { error } = await supabase.from('characters').upsert(results, { onConflict: 'id' })
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    const { error } = await supabase!.from('characters').upsert(results, { onConflict: 'id' })
+    if (error) return NextResponse.json({ error: `Supabase write error: ${error.message}` }, { status: 500 })
   }
 
   return NextResponse.json({
