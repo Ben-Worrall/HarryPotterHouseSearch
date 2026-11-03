@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createOpenAI } from '@ai-sdk/openai'
+import { createAnthropic } from '@ai-sdk/anthropic'
 import { generateText } from 'ai'
 import { createClient } from '@supabase/supabase-js'
 import { readFileSync } from 'fs'
@@ -41,11 +41,10 @@ function getSupabaseAdmin() {
 }
 
 function getAI() {
-  const vercel = createOpenAI({
-    baseURL: 'https://api.vercel.ai/v1',
-    apiKey: process.env.VERCEL_AI_API_KEY!,
-  })
-  return vercel('anthropic/claude-3-5-haiku-20241022')
+  const key = process.env.ANTHROPIC_API_KEY
+  if (!key) throw new Error('ANTHROPIC_API_KEY is not set in Vercel env vars')
+  const anthropic = createAnthropic({ apiKey: key })
+  return anthropic('claude-haiku-4-5-20251001')
 }
 
 function loadCandidates() {
@@ -95,7 +94,7 @@ export async function GET() {
       supabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
       supabaseAnon: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       supabaseAdmin: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      vercelAI: !!process.env.VERCEL_AI_API_KEY,
+      anthropicKey: !!process.env.ANTHROPIC_API_KEY,
     },
   })
 }
@@ -109,9 +108,8 @@ export async function POST(req: NextRequest) {
   try { supabase = getSupabaseAdmin() }
   catch (e: any) { return NextResponse.json({ error: e.message }, { status: 500 }) }
 
-  const vercelAIKey = process.env.VERCEL_AI_API_KEY
-  if (!vercelAIKey) {
-    return NextResponse.json({ error: 'VERCEL_AI_API_KEY is not set in Vercel env vars' }, { status: 500 })
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return NextResponse.json({ error: 'ANTHROPIC_API_KEY is not set in Vercel env vars. Get a free key at console.anthropic.com' }, { status: 500 })
   }
 
   const candidates = loadCandidates()
