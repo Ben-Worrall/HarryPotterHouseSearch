@@ -1,20 +1,26 @@
 -- Run this once in the Supabase SQL editor (dashboard → SQL Editor → New query)
 
 create table if not exists public.characters (
-  id          text        primary key,
-  name        text        not null,
-  source      text        not null,
-  creator     text        not null default '',
-  year        integer,
-  medium      text        not null,
-  house       text        not null check (house in ('Gryffindor','Slytherin','Ravenclaw','Hufflepuff')),
-  scores      jsonb       not null,
-  traits      text[]      not null default '{}',
-  background  text        not null default '',
-  reasoning   text        not null default '',
-  created_at  timestamptz not null default now(),
-  updated_at  timestamptz not null default now()
+  id                  text        primary key,
+  name                text        not null,
+  source              text        not null,
+  creator             text        not null default '',
+  year                integer,
+  medium              text        not null,
+  house               text        not null check (house in ('Gryffindor','Slytherin','Ravenclaw','Hufflepuff')),
+  scores              jsonb       not null,
+  traits              text[]      not null default '{}',
+  background          text        not null default '',
+  reasoning           text        not null default '',
+  image_url           text,
+  wikipedia_summary   text,
+  created_at          timestamptz not null default now(),
+  updated_at          timestamptz not null default now()
 );
+
+-- If the table already exists, add the new columns:
+alter table public.characters add column if not exists image_url text;
+alter table public.characters add column if not exists wikipedia_summary text;
 
 -- Full-text search index on name + source + creator
 create index if not exists characters_fts

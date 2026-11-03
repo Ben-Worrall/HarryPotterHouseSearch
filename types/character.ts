@@ -5,11 +5,13 @@ export interface Character {
   name: string
   source: string
   creator: string
-  year: number
+  year: number | null
   medium: string
   house: House
   scores: Record<House, number>
   traits: string[]
   background: string
   reasoning: string
+  image_url?: string | null
+  wikipedia_summary?: string | null
 }
