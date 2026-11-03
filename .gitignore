@@ -3,3 +3,6 @@ __pycache__/
 .env
 .venv/
 data/nightly.log
+node_modules/
+.next/
+

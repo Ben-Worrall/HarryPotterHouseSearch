@@ -3,7 +3,6 @@ body { margin: 0; }
 [hidden] { display: none !important; }
 img { max-width: 100%; }
 
-/* Layout: archival register — search ledger on the left, open file card on the right; stacks on phones */
 :root {
   --paper: #ECEEE8;
   --sheet: #F8F9F5;
@@ -12,9 +11,9 @@ img { max-width: 100%; }
   --rule: #CDD3CC;
   --accent: #6E4F24;
   --gry: #9B2B22; --sly: #1F6447; --rav: #2B4C82; --huf: #A37A0E;
-  --f-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
-  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-display: var(--font-display), "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --f-body: var(--font-body), "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: var(--font-mono), "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --paper: #161A18; --sheet: #1E2321; --ink: #E5E8E2; --muted: #9AA39D; --rule: #333B37; --accent: #D2A869;
@@ -27,7 +26,7 @@ img { max-width: 100%; }
 body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
 .wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 56px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
 h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1; margin: 0; text-wrap: balance; }
 h1 em { color: var(--accent); }
 .tag { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
@@ -75,7 +74,6 @@ select { font-family: var(--f-mono); font-size: 12.5px; padding: 6px 8px; backgr
 .card h3 { font-family: var(--f-mono); font-weight: 500; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 22px 0 6px; }
 .card p { margin: 0; max-width: 65ch; }
 .runner { font-size: 14.5px; color: var(--muted); margin-top: 10px !important; }
-.back { display: none; }
 
 @media (max-width: 760px) {
   .main { grid-template-columns: minmax(0,1fr); }
