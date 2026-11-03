@@ -87,7 +87,7 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
             <div className="bar" key={h}>
               <span style={{ color: HOUSES[h].c, fontWeight: h === d.house ? 600 : 400 }}>{h}</span>
               <span className="track">
-                <span className="fill" style={{ width: `${d.scores[h]}%`, background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.4 }} />
+                <span className="fill" style={{ '--bar-w': `${d.scores[h]}%`, background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.4 } as React.CSSProperties} />
               </span>
               <span className="v">{d.scores[h]}%</span>
             </div>
