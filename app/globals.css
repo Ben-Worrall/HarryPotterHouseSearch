@@ -11,9 +11,9 @@ img { max-width: 100%; }
   --rule: #CDD3CC;
   --accent: #6E4F24;
   --gry: #9B2B22; --sly: #1F6447; --rav: #2B4C82; --huf: #A37A0E;
-  --f-display: var(--font-display), "IM Fell English", "Iowan Old Style", Georgia, serif;
-  --f-body: var(--font-body), "Source Serif 4", Georgia, "Times New Roman", serif;
-  --f-mono: var(--font-mono), "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --paper: #161A18; --sheet: #1E2321; --ink: #E5E8E2; --muted: #9AA39D; --rule: #333B37; --accent: #D2A869;
