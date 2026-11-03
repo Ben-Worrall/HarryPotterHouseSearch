@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { Character, House } from '@/types/character'
 
 export const HOUSES: Record<House, { c: string; bg: string; virtue: string }> = {
@@ -51,7 +51,7 @@ function Avatar({ char }: { char: Character }) {
   )
 }
 
-function CharacterCard({ character: d }: { character: Character }) {
+function CharacterCard({ character: d, onClose }: { character: Character; onClose: () => void }) {
   const H = HOUSES[d.house]
   const [ruH, ruV] = runnerUp(d)
   const conf = confOf(d)
@@ -74,6 +74,7 @@ function CharacterCard({ character: d }: { character: Character }) {
           </div>
         </div>
       )}
+      <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
       <div className="card-body">
         <div className="meta">{d.source} · {d.creator}{d.year ? ` · ${d.year}` : ''} · {d.medium}</div>
         <h2>{d.name}</h2>
@@ -109,29 +110,32 @@ export default function SortingRegister({ initialData }: { initialData: Characte
   const [house, setHouse] = useState('all')
   const [sort, setSort] = useState<'name' | 'conf' | 'year'>('name')
   const [sel, setSel] = useState<string | null>(null)
-  const [mobileView, setMobileView] = useState<'list' | 'card'>('list')
+  const modalRef = useRef<HTMLDivElement>(null)
 
+  // Close on Escape
   useEffect(() => {
-    const id = window.location.hash.slice(1)
-    const sorted = applySort(initialData, 'name')
-    setSel(initialData.find(d => d.id === id)?.id ?? sorted[0]?.id ?? null)
-    const onHash = () => {
-      const hid = window.location.hash.slice(1)
-      if (initialData.find(d => d.id === hid)) setSel(hid)
-    }
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [initialData])
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSel(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
-  const filtered = applySort(applyFilter(initialData, q, medium, house), sort)
-  const effectiveSel = filtered.find(d => d.id === sel)?.id ?? filtered[0]?.id ?? null
-  const selected = initialData.find(d => d.id === effectiveSel) ?? null
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = sel ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [sel])
 
   function handleSelect(id: string) {
-    setSel(id)
-    setMobileView('card')
+    setSel(prev => prev === id ? null : id)
     history.replaceState(null, '', '#' + id)
   }
+
+  function handleBackdropClick(e: React.MouseEvent) {
+    if (e.target === e.currentTarget) setSel(null)
+  }
+
+  const filtered = applySort(applyFilter(initialData, q, medium, house), sort)
+  const selected = initialData.find(d => d.id === sel) ?? null
 
   const houseCounts = ORDER.map(h => ({ h, n: initialData.filter(d => d.house === h).length }))
   const maxCount = Math.max(...houseCounts.map(x => x.n), 1)
@@ -184,59 +188,42 @@ export default function SortingRegister({ initialData }: { initialData: Characte
         ))}
       </div>
 
-      <div className="main">
-        {/* List panel */}
-        <div style={{ display: mobileView === 'card' ? 'none' : undefined }} id="list-panel">
-          <ul className="list">
-            <div className="list-inner">
-              {filtered.length === 0 ? (
-                <li className="empty">No characters match. Try clearing the filters.</li>
-              ) : filtered.map(d => (
-                <li key={d.id}>
-                  <button
-                    aria-current={effectiveSel === d.id ? 'true' : undefined}
-                    style={{
-                      '--active-bg': HOUSES[d.house].bg,
-                    } as React.CSSProperties}
-                    onClick={() => handleSelect(d.id)}
-                  >
-                    <span className="stripe" style={{ background: HOUSES[d.house].c }} />
-                    <Avatar char={d} />
-                    <span style={{ minWidth: 0, padding: '2px 0' }}>
-                      <span className="nm">{d.name}</span>
-                      <span className="src">{d.source}{d.year ? ` · ${d.year}` : ''}</span>
-                    </span>
-                    <span className="pct" style={{ color: HOUSES[d.house].c }}>
-                      {d.house.slice(0, 3).toUpperCase()} {confOf(d)}%
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </div>
-          </ul>
+      <ul className="list">
+        <div className="list-inner">
+          {filtered.length === 0 ? (
+            <li className="empty">No characters match. Try clearing the filters.</li>
+          ) : filtered.map(d => (
+            <li key={d.id}>
+              <button
+                aria-expanded={sel === d.id ? 'true' : 'false'}
+                style={{ '--active-bg': HOUSES[d.house].bg } as React.CSSProperties}
+                onClick={() => handleSelect(d.id)}
+              >
+                <span className="stripe" style={{ background: HOUSES[d.house].c }} />
+                <Avatar char={d} />
+                <span style={{ minWidth: 0, padding: '2px 0' }}>
+                  <span className="nm">{d.name}</span>
+                  <span className="src">{d.source}{d.year ? ` · ${d.year}` : ''}</span>
+                </span>
+                <span className="pct" style={{ color: HOUSES[d.house].c }}>
+                  {d.house.slice(0, 3).toUpperCase()} {confOf(d)}%
+                </span>
+              </button>
+            </li>
+          ))}
         </div>
+      </ul>
 
-        {/* Card panel */}
-        <article
-          className="card" id="card" aria-live="polite"
-          style={{ display: mobileView === 'list' ? undefined : undefined }}
-        >
-          {selected
-            ? <CharacterCard character={selected} />
-            : <div className="card-empty"><p>Select a character to see their sorting.</p></div>
-          }
-        </article>
-      </div>
-
-      {/* Mobile bottom nav */}
-      <nav className="mobile-nav" aria-label="View switcher">
-        <button className={mobileView === 'list' ? 'active' : ''} onClick={() => setMobileView('list')}>
-          ☰ List ({filtered.length})
-        </button>
-        <button className={mobileView === 'card' ? 'active' : ''} onClick={() => setMobileView('card')} disabled={!selected}>
-          ✦ {selected ? selected.name : 'Select a character'}
-        </button>
-      </nav>
+      {/* Modal */}
+      {selected && (
+        <div className="modal-backdrop" onClick={handleBackdropClick}>
+          <div className="modal-wrap" ref={modalRef} role="dialog" aria-modal="true" aria-label={selected.name}>
+            <article className="card">
+              <CharacterCard character={selected} onClose={() => setSel(null)} />
+            </article>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
