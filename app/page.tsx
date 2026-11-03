@@ -2,8 +2,8 @@ import { supabase } from '@/lib/supabase'
 import type { Character } from '@/types/character'
 import SortingRegister from '@/components/SortingRegister'
 
-// Revalidate every hour so nightly additions appear without a manual redeploy
-export const revalidate = 3600
+// Revalidate every 60s so newly sorted characters appear quickly
+export const revalidate = 60
 
 export default async function Home() {
   const { data, error } = await supabase
