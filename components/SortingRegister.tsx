@@ -60,14 +60,15 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
   const fillRefs = useRef<Record<string, HTMLSpanElement | null>>({})
 
   useEffect(() => {
-    // Imperative width set after paint — bypasses React batching so CSS transition fires reliably on mobile
-    const id = requestAnimationFrame(() => {
+    // setTimeout gives the browser a full frame to paint width:0% before we set the target,
+    // so the CSS transition fires reliably on Android/iOS (rAF fires before first paint)
+    const id = setTimeout(() => {
       ORDER.forEach(h => {
         const el = fillRefs.current[h]
         if (el) el.style.width = `${d.scores[h]}%`
       })
-    })
-    return () => cancelAnimationFrame(id)
+    }, 80)
+    return () => clearTimeout(id)
   }, [d])
 
   return (
@@ -94,7 +95,7 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
                 <span
                   className="fill"
                   ref={el => { fillRefs.current[h] = el }}
-                  style={{ background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.4 }}
+                  style={{ background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.7, width: '0%' }}
                 />
               </span>
               <span className="v">{d.scores[h]}%</span>
