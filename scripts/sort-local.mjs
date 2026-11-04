@@ -1,18 +1,17 @@
 /**
- * Local sorter — uses the `claude` CLI already authenticated on this machine.
- * Reads data/candidates.json, sorts in batches, upserts to Supabase.
+ * Local sorter — calls the Google Gemini API directly.
+ * No claude -p, no session limits, completely free.
  *
- * Usage: node scripts/sort-local.mjs [--count 50] [--batch 5]
+ * Usage: node scripts/sort-local.mjs [--count 500] [--batch 15]
+ * Requires GOOGLE_API_KEY in .env (free from aistudio.google.com)
  */
-import { execSync } from 'child_process'
-import { readFileSync, writeFileSync, existsSync } from 'fs'
+import { readFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const CANDS_PATH = join(ROOT, 'data', 'candidates.json')
-const CHARS_PATH = join(ROOT, 'public', 'data', 'characters.json')
 
 // ── load .env ─────────────────────────────────────────────────────────────
 function loadEnv() {
@@ -33,8 +32,8 @@ function getArg(name, def) {
   return i >= 0 ? parseInt(process.argv[i + 1]) : def
 }
 
-const COUNT = getArg('--count', 50)   // total to sort this run
-const BATCH = getArg('--batch', 5)    // characters per claude call
+const COUNT = getArg('--count', 500)
+const BATCH = getArg('--batch', 15)
 
 // ── Supabase ──────────────────────────────────────────────────────────────
 async function supabaseGet(url, key, path) {
@@ -58,7 +57,7 @@ async function supabaseUpsert(url, key, records) {
   if (!res.ok) throw new Error(`Supabase upsert failed: ${res.status} ${await res.text()}`)
 }
 
-// ── rubric ────────────────────────────────────────────────────────────────
+// ── Gemini ────────────────────────────────────────────────────────────────
 const SYSTEM = `You are the Sorting Hat for characters from all of fiction. Judge each character on who they are across their story, not one scene.
 
 House criteria:
@@ -90,10 +89,38 @@ function normalise(raw) {
   } catch { return null }
 }
 
-const TMP_PROMPT = join(ROOT, 'data', '_sort_prompt.txt')
-const TMP_OUT    = join(ROOT, 'data', '_sort_out.txt')
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)) }
 
-function sortBatch(candidates) {
+async function callGemini(promptText, apiKey, attempt = 0) {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: SYSTEM }] },
+        contents: [{ role: 'user', parts: [{ text: promptText }] }],
+        generationConfig: { temperature: 0.3, maxOutputTokens: 8192 },
+      }),
+      signal: AbortSignal.timeout(60000),
+    }
+  )
+
+  if (res.status === 429 && attempt < 3) {
+    await sleep(10000 * (attempt + 1))
+    return callGemini(promptText, apiKey, attempt + 1)
+  }
+
+  if (!res.ok) {
+    const body = await res.text()
+    throw new Error(`Gemini ${res.status}: ${body.slice(0, 200)}`)
+  }
+
+  const data = await res.json()
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || ''
+}
+
+async function sortBatch(candidates, apiKey) {
   const prompt = `Sort these ${candidates.length} characters. Return ONLY a JSON array, no markdown:\n` +
     candidates.map(c =>
       JSON.stringify({
@@ -103,23 +130,9 @@ function sortBatch(candidates) {
       })
     ).join('\n')
 
-  // Write prompt to file to avoid shell escaping issues
-  writeFileSync(TMP_PROMPT, `${SYSTEM}\n\n${prompt}`, 'utf-8')
-
-  let raw
-  try {
-    const out = execSync(
-      `claude -p --output-format json < "${TMP_PROMPT}"`,
-      { timeout: 120000, maxBuffer: 4 * 1024 * 1024, encoding: 'utf-8', shell: true }
-    )
-    const parsed = JSON.parse(out)
-    raw = typeof parsed.result === 'string' ? parsed.result : JSON.stringify(parsed)
-  } catch (e) {
-    throw new Error(`claude -p failed: ${e.message.slice(0, 300)}`)
-  }
-
-  const match = raw.match(/\[[\s\S]*\]/)
-  if (!match) throw new Error(`No JSON array in response. Got: ${raw.slice(0, 300)}`)
+  const text = await callGemini(prompt, apiKey)
+  const match = text.match(/\[[\s\S]*\]/)
+  if (!match) throw new Error(`No JSON array in response: ${text.slice(0, 200)}`)
   return JSON.parse(match[0])
 }
 
@@ -128,16 +141,22 @@ loadEnv()
 
 const SUPA_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
 const SUPA_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const GOOGLE_KEY = process.env.GOOGLE_API_KEY
 
 if (!SUPA_URL || !SUPA_KEY) {
   console.error('Missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY in .env')
+  process.exit(1)
+}
+if (!GOOGLE_KEY) {
+  console.error('\nMissing GOOGLE_API_KEY in .env')
+  console.error('Get a free key in 30 seconds at https://aistudio.google.com/app/apikey')
+  console.error('Then add:  GOOGLE_API_KEY=your-key-here  to your .env file\n')
   process.exit(1)
 }
 
 const candidates = JSON.parse(readFileSync(CANDS_PATH, 'utf-8'))
 console.log(`\nLoaded ${candidates.length} candidates.`)
 
-// Get already-sorted IDs from Supabase
 process.stdout.write('Fetching sorted IDs from Supabase... ')
 const existing = await supabaseGet(SUPA_URL, SUPA_KEY, 'characters?select=id')
 const sortedIds = new Set(existing.map(c => c.id))
@@ -152,10 +171,11 @@ let totalSkipped = 0
 
 for (let i = 0; i < toSort.length; i += BATCH) {
   const batch = toSort.slice(i, i + BATCH)
-  process.stdout.write(`[${i + 1}–${Math.min(i + BATCH, toSort.length)}/${toSort.length}] Sorting ${batch.map(c => c.name).join(', ')}... `)
+  const names = batch.map(c => c.name).join(', ')
+  process.stdout.write(`[${i + 1}–${Math.min(i + BATCH, toSort.length)}/${toSort.length}] ${names.slice(0, 80)}... `)
 
   try {
-    const results = sortBatch(batch)
+    const results = await sortBatch(batch, GOOGLE_KEY)
     const records = []
 
     for (const item of results) {
@@ -182,16 +202,15 @@ for (let i = 0; i < toSort.length; i += BATCH) {
       totalSorted += records.length
       console.log(`✓ ${records.length} saved`)
     } else {
-      console.log(`⚠ all skipped`)
       totalSkipped += batch.length
+      console.log(`⚠ all skipped`)
     }
   } catch (e) {
     console.log(`✗ ${e.message.slice(0, 120)}`)
     totalSkipped += batch.length
   }
 
-  // Brief pause between batches
-  await new Promise(r => setTimeout(r, 800))
+  await sleep(500)
 }
 
 console.log(`\n✓ Done. Sorted ${totalSorted}, skipped ${totalSkipped}.`)
