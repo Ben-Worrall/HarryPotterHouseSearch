@@ -129,19 +129,12 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
 
   return (
     <>
-      {d.image_url ? (
-        <div className="card-hero">
-          <img src={d.image_url} alt={d.name} />
-          <div className="card-hero-fade" />
+      <div className="card-hero card-hero-crest" style={{ background: `linear-gradient(160deg, ${H.c}1a, ${H.c}06)` }}>
+        <div className="house-crest" style={{ color: H.c }}>
+          {HOUSE_CRESTS[d.house]}
         </div>
-      ) : (
-        <div className="card-hero card-hero-crest" style={{ background: `linear-gradient(160deg, ${H.c}1a, ${H.c}06)` }}>
-          <div className="house-crest" style={{ color: H.c }}>
-            {HOUSE_CRESTS[d.house]}
-          </div>
-          <div className="crest-label" style={{ color: H.c }}>{d.house}</div>
-        </div>
-      )}
+        <div className="crest-label" style={{ color: H.c }}>{d.house}</div>
+      </div>
       <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
       <div className="card-body">
         <div className="meta">{d.source} · {d.creator}{d.year ? ` · ${d.year}` : ''} · {d.medium}</div>
