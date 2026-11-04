@@ -6,15 +6,24 @@ import SortingRegister from '@/components/SortingRegister'
 export const revalidate = 60
 
 export default async function Home() {
-  const { data, error } = await supabase
-    .from('characters')
-    .select('id,name,source,creator,year,medium,house,scores,traits,background,reasoning,image_url')
-    .order('name')
+  // Supabase default limit is 1000 — paginate to get all characters
+  const all: Character[] = []
+  let from = 0
+  const pageSize = 1000
 
-  if (error) {
-    console.error('Supabase fetch error:', error.message)
+  while (true) {
+    const { data, error } = await supabase
+      .from('characters')
+      .select('id,name,source,creator,year,medium,house,scores,traits,background,reasoning,image_url')
+      .order('name')
+      .range(from, from + pageSize - 1)
+
+    if (error) { console.error('Supabase fetch error:', error.message); break }
+    if (!data || data.length === 0) break
+    all.push(...(data as Character[]))
+    if (data.length < pageSize) break
+    from += pageSize
   }
 
-  const characters = (data ?? []) as Character[]
-  return <SortingRegister initialData={characters} />
+  return <SortingRegister initialData={all} />
 }

@@ -37,11 +37,22 @@ const BATCH = getArg('--batch', 15)
 
 // ── Supabase ──────────────────────────────────────────────────────────────
 async function supabaseGet(url, key, path) {
-  const res = await fetch(`${url}/rest/v1/${path}`, {
-    headers: { apikey: key, Authorization: `Bearer ${key}` },
-  })
-  if (!res.ok) throw new Error(`Supabase GET failed: ${res.status} ${await res.text()}`)
-  return res.json()
+  // Paginate to get all rows (Supabase default limit is 1000)
+  const all = []
+  let from = 0
+  const pageSize = 1000
+  while (true) {
+    const sep = path.includes('?') ? '&' : '?'
+    const res = await fetch(`${url}/rest/v1/${path}${sep}offset=${from}&limit=${pageSize}`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}`, Prefer: 'count=exact' },
+    })
+    if (!res.ok) throw new Error(`Supabase GET failed: ${res.status} ${await res.text()}`)
+    const page = await res.json()
+    all.push(...page)
+    if (page.length < pageSize) break
+    from += pageSize
+  }
+  return all
 }
 
 async function supabaseUpsert(url, key, records) {
@@ -91,9 +102,17 @@ function normalise(raw) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)) }
 
-async function callGemini(promptText, apiKey, attempt = 0) {
+const GEMINI_MODELS = [
+  'gemini-flash-lite-latest',
+  'gemini-3.8-flash',
+  'gemini-flash-latest',
+  'gemini-pro-latest',
+]
+
+async function callGemini(promptText, apiKey, modelIdx = 0, attempt = 0) {
+  const model = GEMINI_MODELS[modelIdx % GEMINI_MODELS.length]
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -106,14 +125,26 @@ async function callGemini(promptText, apiKey, attempt = 0) {
     }
   )
 
-  if (res.status === 429 && attempt < 3) {
-    await sleep(10000 * (attempt + 1))
-    return callGemini(promptText, apiKey, attempt + 1)
+  // Rate limited — try next model immediately
+  if (res.status === 429) {
+    if (modelIdx + 1 < GEMINI_MODELS.length) {
+      await sleep(1000)
+      return callGemini(promptText, apiKey, modelIdx + 1, 0)
+    }
+    throw new Error(`Rate limited on all models`)
+  }
+
+  // Model overloaded/unavailable — try next model
+  if (res.status === 503 || res.status === 404) {
+    if (modelIdx + 1 < GEMINI_MODELS.length) {
+      await sleep(1000)
+      return callGemini(promptText, apiKey, modelIdx + 1, 0)
+    }
   }
 
   if (!res.ok) {
     const body = await res.text()
-    throw new Error(`Gemini ${res.status}: ${body.slice(0, 200)}`)
+    throw new Error(`Gemini ${model} ${res.status}: ${body.slice(0, 200)}`)
   }
 
   const data = await res.json()
