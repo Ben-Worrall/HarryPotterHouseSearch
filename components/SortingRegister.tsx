@@ -3,6 +3,75 @@
 import { useState, useEffect, useRef } from 'react'
 import type { Character, House } from '@/types/character'
 
+const HOUSE_CRESTS: Record<string, React.ReactElement> = {
+  Gryffindor: (
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <ellipse cx="50" cy="54" rx="32" ry="30" opacity=".3"/>
+      <circle cx="50" cy="48" r="20"/>
+      <polygon points="32,34 26,20 40,28"/>
+      <polygon points="68,34 74,20 60,28"/>
+      <circle cx="43" cy="44" r="3.5" fill="white" opacity=".9"/>
+      <circle cx="57" cy="44" r="3.5" fill="white" opacity=".9"/>
+      <circle cx="43.5" cy="44.5" r="2" opacity=".5" fill="white"/>
+      <circle cx="57.5" cy="44.5" r="2" opacity=".5" fill="white"/>
+      <ellipse cx="50" cy="54" rx="4" ry="2.5" fill="white" opacity=".6"/>
+      <path d="M46 57 Q50 61 54 57" stroke="white" strokeWidth="1.5" fill="none" opacity=".6" strokeLinecap="round"/>
+      <path d="M20 56 Q22 49 29 44" stroke="currentColor" strokeWidth="3" fill="none" opacity=".45" strokeLinecap="round"/>
+      <path d="M80 56 Q78 49 71 44" stroke="currentColor" strokeWidth="3" fill="none" opacity=".45" strokeLinecap="round"/>
+      <path d="M24 66 Q28 57 36 55" stroke="currentColor" strokeWidth="3" fill="none" opacity=".45" strokeLinecap="round"/>
+      <path d="M76 66 Q72 57 64 55" stroke="currentColor" strokeWidth="3" fill="none" opacity=".45" strokeLinecap="round"/>
+      <path d="M33 72 Q50 80 67 72 L64 62 Q50 68 36 62 Z" opacity=".25"/>
+    </svg>
+  ),
+  Slytherin: (
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <path d="M50 85 C30 85 15 70 20 55 C25 40 42 38 48 50 C52 58 45 68 35 65 C25 62 22 50 30 42 C38 34 52 36 60 45 C68 54 65 68 55 72 C45 76 32 72 28 62"
+        fill="none" stroke="currentColor" strokeWidth="9" strokeLinecap="round" opacity=".9"/>
+      <ellipse cx="62" cy="30" rx="12" ry="8" transform="rotate(30 62 30)"/>
+      <ellipse cx="66" cy="26" rx="2" ry="3" fill="white" opacity=".9" transform="rotate(30 66 26)"/>
+      <path d="M72 32 L80 26 M80 26 L84 22 M80 26 L84 29" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" opacity=".8"/>
+    </svg>
+  ),
+  Ravenclaw: (
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <path d="M50 55 C45 50 30 40 15 42 C10 43 12 50 20 48 C28 46 38 52 42 58 Z" opacity=".9"/>
+      <path d="M50 55 C55 50 70 40 85 42 C90 43 88 50 80 48 C72 46 62 52 58 58 Z" opacity=".9"/>
+      <path d="M15 42 C20 36 30 32 40 38" stroke="white" strokeWidth="1" fill="none" opacity=".35"/>
+      <path d="M20 44 C26 38 34 36 40 40" stroke="white" strokeWidth="1" fill="none" opacity=".35"/>
+      <path d="M85 42 C80 36 70 32 60 38" stroke="white" strokeWidth="1" fill="none" opacity=".35"/>
+      <path d="M80 44 C74 38 66 36 60 40" stroke="white" strokeWidth="1" fill="none" opacity=".35"/>
+      <ellipse cx="50" cy="63" rx="8" ry="14" opacity=".8"/>
+      <circle cx="50" cy="40" r="11"/>
+      <path d="M57 39 L67 42 L57 45 Z" fill="white" opacity=".8"/>
+      <circle cx="54" cy="39" r="3" fill="white" opacity=".9"/>
+      <circle cx="54.5" cy="39.5" r="1.5" fill="currentColor" opacity=".5"/>
+      <path d="M44 76 L50 93 L56 76" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round"/>
+      <path d="M42 74 L46 91" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" opacity=".55"/>
+      <path d="M58 74 L54 91" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" opacity=".55"/>
+    </svg>
+  ),
+  Hufflepuff: (
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+      <ellipse cx="50" cy="78" rx="24" ry="16" opacity=".55"/>
+      <ellipse cx="50" cy="52" rx="26" ry="22"/>
+      <ellipse cx="30" cy="34" rx="8" ry="6"/>
+      <ellipse cx="70" cy="34" rx="8" ry="6"/>
+      <ellipse cx="30" cy="34" rx="4" ry="3" fill="white" opacity=".45"/>
+      <ellipse cx="70" cy="34" rx="4" ry="3" fill="white" opacity=".45"/>
+      <path d="M50 30 Q50 52 50 68" stroke="white" strokeWidth="10" strokeLinecap="round" opacity=".65"/>
+      <ellipse cx="38" cy="50" rx="10" ry="12" opacity=".3"/>
+      <ellipse cx="62" cy="50" rx="10" ry="12" opacity=".3"/>
+      <circle cx="38" cy="48" r="4" fill="white" opacity=".9"/>
+      <circle cx="62" cy="48" r="4" fill="white" opacity=".9"/>
+      <circle cx="38.5" cy="48.5" r="2.2" fill="currentColor" opacity=".5"/>
+      <circle cx="62.5" cy="48.5" r="2.2" fill="currentColor" opacity=".5"/>
+      <ellipse cx="50" cy="60" rx="5" ry="3.5" fill="white" opacity=".65"/>
+      <path d="M45 64 Q50 68 55 64" stroke="white" strokeWidth="1.5" fill="none" opacity=".6" strokeLinecap="round"/>
+      <path d="M28 92 L26 100 M34 93 L33 100 M66 93 L67 100 M72 92 L74 100" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity=".45"/>
+    </svg>
+  ),
+}
+
 export const HOUSES: Record<House, { c: string; bg: string; virtue: string }> = {
   Gryffindor: { c: 'var(--gry)', bg: 'var(--gry-bg)', virtue: 'courage and nerve' },
   Slytherin:  { c: 'var(--sly)', bg: 'var(--sly-bg)', virtue: 'ambition and cunning' },
@@ -66,12 +135,11 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
           <div className="card-hero-fade" />
         </div>
       ) : (
-        <div className="card-hero" style={{ background: `linear-gradient(135deg, ${H.c}33, ${H.c}08)` }}>
-          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ fontFamily: 'var(--f-display)', fontSize: '5rem', color: H.c, opacity: 0.25, fontStyle: 'italic' }}>
-              {d.name[0]}
-            </span>
+        <div className="card-hero card-hero-crest" style={{ background: `linear-gradient(160deg, ${H.c}1a, ${H.c}06)` }}>
+          <div className="house-crest" style={{ color: H.c }}>
+            {HOUSE_CRESTS[d.house]}
           </div>
+          <div className="crest-label" style={{ color: H.c }}>{d.house}</div>
         </div>
       )}
       <button className="modal-close" onClick={onClose} aria-label="Close">✕</button>
