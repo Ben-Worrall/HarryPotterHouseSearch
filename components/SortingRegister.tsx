@@ -57,19 +57,6 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
   const conf = confOf(d)
   const gap = conf - ruV
   const fit = gap >= 30 ? 'Clear fit' : gap >= 12 ? 'Solid fit' : 'Close call'
-  const fillRefs = useRef<Record<string, HTMLSpanElement | null>>({})
-
-  useEffect(() => {
-    // setTimeout gives the browser a full frame to paint width:0% before we set the target,
-    // so the CSS transition fires reliably on Android/iOS (rAF fires before first paint)
-    const id = setTimeout(() => {
-      ORDER.forEach(h => {
-        const el = fillRefs.current[h]
-        if (el) el.style.width = `${d.scores[h]}%`
-      })
-    }, 80)
-    return () => clearTimeout(id)
-  }, [d])
 
   return (
     <>
@@ -94,8 +81,7 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
               <span className="track">
                 <span
                   className="fill"
-                  ref={el => { fillRefs.current[h] = el }}
-                  style={{ background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.7, width: '0%' }}
+                  style={{ background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.7, width: `${d.scores[h]}%` }}
                 />
               </span>
               <span className="v">{d.scores[h]}%</span>
