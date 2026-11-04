@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100" height="120">
+  <title>Gryffindor</title>
+  <defs>
+    <clipPath id="g-clip">
+      <path d="M8,8 L92,8 L92,72 Q92,105 50,118 Q8,105 8,72Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Shield background -->
+  <path d="M8,8 L92,8 L92,72 Q92,105 50,118 Q8,105 8,72Z" fill="#740001"/>
+
+  <g clip-path="url(#g-clip)">
+    <!-- Tail sweeps up over body -->
+    <path d="M64,86 Q80,76 80,60 Q80,46 70,40" stroke="#FFD700" stroke-width="6"
+          fill="none" stroke-linecap="round"/>
+    <circle cx="70" cy="37" r="8" fill="#FFD700"/>
+
+    <!-- Body (rearing, tilted slightly) -->
+    <path d="M36,98 Q32,84 33,70 Q34,58 42,53 Q50,49 60,53 L66,62 L65,82 Q61,93 52,98Z"
+          fill="#FFD700"/>
+
+    <!-- Left hind leg -->
+    <path d="M36,98 Q32,108 36,114 L46,114 L48,98Z" fill="#FFD700"/>
+    <!-- Right hind leg -->
+    <path d="M52,98 Q56,108 52,114 L44,114 L46,98Z" fill="#FFD700"/>
+
+    <!-- Left front arm raised -->
+    <path d="M36,68 Q22,56 18,44 Q17,37 25,39 L33,56 L36,68Z" fill="#FFD700"/>
+    <!-- Left paw claws -->
+    <path d="M20,38 L15,33" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M22,36 L19,29" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M25,36 L24,28" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Right front arm raised -->
+    <path d="M64,65 Q76,54 80,43 Q82,36 75,38 L67,54 L64,65Z" fill="#FFD700"/>
+    <!-- Right paw claws -->
+    <path d="M75,37 L80,32" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M77,36 L80,29" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M79,37 L85,33" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Mane -->
+    <circle cx="52" cy="50" r="18" fill="#C49200"/>
+    <!-- Head -->
+    <circle cx="54" cy="47" r="12" fill="#FFD700"/>
+    <!-- Ears -->
+    <polygon points="46,37 50,28 55,37" fill="#FFD700"/>
+    <polygon points="56,37 61,28 66,37" fill="#FFD700"/>
+    <!-- Eyes -->
+    <circle cx="49" cy="44" r="3" fill="#740001"/>
+    <circle cx="60" cy="44" r="3" fill="#740001"/>
+    <circle cx="49.5" cy="43.5" r="1.2" fill="#FFEE88" opacity="0.5"/>
+    <circle cx="60.5" cy="43.5" r="1.2" fill="#FFEE88" opacity="0.5"/>
+    <!-- Nose -->
+    <ellipse cx="54" cy="50" rx="3" ry="2" fill="#C49200"/>
+    <!-- Mouth -->
+    <path d="M51,52 Q54,55 57,52" stroke="#C49200" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Shield border (over animal) -->
+  <path d="M8,8 L92,8 L92,72 Q92,105 50,118 Q8,105 8,72Z"
+        fill="none" stroke="#FFD700" stroke-width="3"/>
+  <path d="M14,14 L86,14 L86,72 Q86,101 50,113 Q14,101 14,72Z"
+        fill="none" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+</svg>
