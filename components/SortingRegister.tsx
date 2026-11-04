@@ -57,18 +57,24 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
   const conf = confOf(d)
   const gap = conf - ruV
   const fit = gap >= 30 ? 'Clear fit' : gap >= 12 ? 'Solid fit' : 'Close call'
-  const [barsReady, setBarsReady] = useState(false)
+  const fillRefs = useRef<Record<string, HTMLSpanElement | null>>({})
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setBarsReady(true))
+    // Imperative width set after paint — bypasses React batching so CSS transition fires reliably on mobile
+    const id = requestAnimationFrame(() => {
+      ORDER.forEach(h => {
+        const el = fillRefs.current[h]
+        if (el) el.style.width = `${d.scores[h]}%`
+      })
+    })
     return () => cancelAnimationFrame(id)
-  }, [])
+  }, [d])
 
   return (
     <>
-      <div className="card-hero card-hero-crest" style={{ background: `linear-gradient(160deg, ${H.c}1a, ${H.c}06)` }}>
+      <div className="card-hero card-hero-crest" style={{ background: `linear-gradient(160deg, ${H.c}22, ${H.c}08)` }}>
         <div className="house-crest">
-          <img src={`/house-crests/${d.house.toLowerCase()}.svg`} alt={d.house} />
+          <img src="/HarryPotterLogo.png" alt="Harry Potter" />
         </div>
         <div className="crest-label" style={{ color: H.c }}>{d.house}</div>
       </div>
@@ -87,11 +93,8 @@ function CharacterCard({ character: d, onClose }: { character: Character; onClos
               <span className="track">
                 <span
                   className="fill"
-                  style={{
-                    background: HOUSES[h].c,
-                    opacity: h === d.house ? 1 : 0.4,
-                    width: barsReady ? `${d.scores[h]}%` : '0%',
-                  }}
+                  ref={el => { fillRefs.current[h] = el }}
+                  style={{ background: HOUSES[h].c, opacity: h === d.house ? 1 : 0.4 }}
                 />
               </span>
               <span className="v">{d.scores[h]}%</span>
